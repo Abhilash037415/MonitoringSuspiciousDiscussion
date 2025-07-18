@@ -1,21 +1,19 @@
 # 🕵️ Monitoring Suspicious Discussions (MSD)
 
-Welcome to Monitoring Suspicious Discussions!
-This project is designed to monitor and flag potentially suspicious conversations in online forums using natural language processing.
+Welcome to **Monitoring Suspicious Discussions (MSD)**!
+This project automatically detects and flags potentially harmful or suspicious conversations in online forums using NLP.
 
 ---
 
 ## 🤔 What is MSD?
 
-**Monitoring Suspicious Discussions** is a smart forum surveillance tool built for detecting shady or harmful discussions.
+**Monitoring Suspicious Discussions (MSD)** is an intelligent moderation tool that:
 
-Minimizes manual moderation — this project automates the process by:
+* Automatically scans forum posts.
+* Detects violent, abusive, or inappropriate content.
+* Flags content for admin review only when necessary.
 
-- Scanning text posts.
-- Identifying violent/threatening/abusive language.
-- Storing and flagging them for admin review only when the context may change the sensitivity of the post.
-
-It’s powered by **Flask**, **Jinja2**, and **MySQL**. Clean, fast, and effective.
+Built using **Flask**, **Jinja2**, and **MySQL**, it's fast, reliable, and super easy to use.
 
 ---
 
@@ -23,61 +21,64 @@ It’s powered by **Flask**, **Jinja2**, and **MySQL**. Clean, fast, and effecti
 
 To run MSD locally, you’ll need:
 
-1. **Python 3.x**
-2. **Flask**
-3. **MySQL Server**
-4. **VS Code** or any editor
-5. A web browser (Chrome recommended)
+* Python 3.x
+* Flask
+* MySQL Server
+* VS Code or any IDE
+* Web Browser (Chrome recommended)
 
 ---
 
 ## 📂 Setting Up MSD on Your System
 
-1. Clone or download this repo.
+1. Clone or download the repository.
 
-2. Inside the main folder, make sure you have:
+2. Ensure the following structure exists:
 
-   - `templates/` (for Jinja2 HTML templates)
-   - `app.py` (Flask server)
-   - `msd.sql` (database schema)
-   - `suspicious_model/` (optional logic/ML models)
+   * `templates/` – Jinja2 HTML files
+   * `app.py` – Flask server script
+   * `msd.sql` – Database schema
+   * `suspicious_model/` – (Optional) Custom logic/ML models
 
 3. In MySQL:
 
-   - Create a database named `msd`
-   - Import `msd.sql` to create necessary tables like `users`, `posts`, and `admins` and make sure to add some data to these tables, either by registering and creating posts (Recommended) or by manually giving them
+   * Create a database named `msd`.
+   * Import the `msd.sql` file to initialize tables like `users`, `posts`, and `admins`.
+   * (Recommended) Register users and create posts using the UI instead of inserting directly.
 
 ---
 
 ## ▶️ Running MSD
 
-1. Install Python dependencies:
+1. Install dependencies:
 
    ```bash
-   pip install flask
+   pip install -r requirements.txt
    ```
 
-   ```bash
-   pip install flask_mysql
+2. (One-time) Download NLTK data:
+
+   ```python
+   import nltk
+   nltk.download('vader_lexicon')
    ```
 
-   ```bash
-   pip install flask_bcrypt
+3. Configure your `.env` file with DB credentials:
+
+   ```env
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=your_password
+   DB_NAME=your_db_name
    ```
 
-   ```bash
-   pip install nltk
-   ```
-
-2. Edit `app.py` and update your DB credentials if needed.
-
-3. Run the server:
+4. Run the server:
 
    ```bash
    python app.py
    ```
 
-4. Open your browser and go to:
+5. Open your browser:
 
    ```
    http://localhost:5000/
@@ -85,32 +86,50 @@ To run MSD locally, you’ll need:
 
 ---
 
-## 💡 How MSD works
+## 💡 How MSD Works
 
-1. You can register/login as a user or admin.
-2. User can submit new posts on the forum.
-3. The system checks each post:
-   - Matches against a list of suspicious keywords
-   - (Optional) Applies NLP logic to evaluate tone
-4. Suspicious posts are flagged and stored in the database.
-5. Admins can log in and view flagged content from the dashboard and moderate them.
+1. Users can **register or log in** as either:
+
+   * Normal users
+   * Admins
+
+2. Users can submit new posts.
+
+3. Each post is analyzed for:
+
+   * Suspicious keywords using fuzzy matching and stemming
+   * Sentiment score using VADER
+
+4. Based on the score:
+
+   * Good posts are published.
+   * Moderately suspicious posts go to **Admin Review**.
+   * Highly offensive posts are marked **deleted**.
+
+5. Admins can:
+
+   * View flagged posts
+   * Approve or delete them
+   * Affect user scores based on actions
 
 ---
 
 ## 👥 Project Contributors
 
-Proudly built by:
+This project was built with ❤️ by:
 
-- [Abhilash037415](https://github.com/Abhilash037415)
-- [AlapatiVamsi05](https://github.com/AlapatiVamsi05)
-- [VarunSai2005](https://github.com/VarunSai2005)
-- [ksamuel-soul](https://github.com/ksamuel-soul)
-- [rohitsripathi9](https://github.com/rohitsripathi9)
-
-We kept it simple, efficient, and on point.
-No login traps. No subscriptions. Just pure suspicious detection.
+* [Abhilash037415](https://github.com/Abhilash037415)
+* [AlapatiVamsi05](https://github.com/AlapatiVamsi05)
+* [VarunSai2005](https://github.com/VarunSai2005)
+* [ksamuel-soul](https://github.com/ksamuel-soul)
+* [rohitsripathi9](https://github.com/rohitsripathi9)
 
 ---
 
-Enjoy using MSD!
-Keep the forums clean, stay safe, and don’t be sus. 🕶️
+## 🧼 Final Thoughts
+
+> We designed MSD to **protect online spaces** from harmful content while minimizing manual moderation work.
+>
+> No subscriptions. No bullshit. Just clean content detection.
+
+Stay safe and don’t be sus. 🕶️
