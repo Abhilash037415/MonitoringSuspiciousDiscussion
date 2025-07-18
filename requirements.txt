@@ -1,0 +1,8 @@
+Flask
+flask-mysqldb
+flask-bcrypt
+flask-cors
+python-dotenv
+nltk
+thefuzz
+gunicorn          # 💥 Required for Render

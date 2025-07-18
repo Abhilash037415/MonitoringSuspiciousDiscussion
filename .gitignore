@@ -1,0 +1,39 @@
+# Python stuff
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.log
+
+# Environment stuff
+.env
+venv/
+ENV/
+env/
+.venv/
+
+# VS Code
+.vscode/
+.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Render or deployment extras
+runtime.txt
+instance/
+.mypy_cache/
+.pytest_cache/
+
+# Ignore compiled or dist files
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Git
+*.swp
+*.swo
